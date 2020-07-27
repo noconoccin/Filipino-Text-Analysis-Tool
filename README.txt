@@ -1,4 +1,4 @@
-/***********************************************************************************
+/*****************************************************************************************
  * 
  * THESIS TITLE: 
  *
@@ -17,7 +17,7 @@
  *		Commission on Higher Education and Department of Science and Technology – 
  *		Science Education Institute
  * 
- **********************************************************************************/
+ *****************************************************************************************/
  
  This API contain functions that processes Filipino texts. It consists Information
  Extraction, Organization, Clustering, and Ranking tasks. Additionally, it includes
@@ -40,6 +40,7 @@
  Sample API and document reference:
  
 	- Nocon, N. (2020). Extracting and organizing disaster-related philippine 
-			community responses for aiding nationwide risk reduction planning and 
-			response (Unpublished master's thesis). De La Salle University, Manila, Philippines
+		community responses for aiding nationwide risk reduction planning and 
+		response (Unpublished master's thesis). De La Salle University, Manila, 
+		Philippines
 	
