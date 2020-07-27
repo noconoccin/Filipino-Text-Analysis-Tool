@@ -28,14 +28,16 @@
 	1) Python codes grouped per module
 	2) Supporting documents to run and understand the API such as User's Manual, 
 	   Technical Manual, requirements.txt, full and abridged Thesis documentation
-	3) Model files (for preprocessing and clustering tools)
 	4) 'Test' folder that produces generated outputs from modules
 	5) Miscellaneous folders comprising of libraries and caches
 	  
- * Link to MGNN Tagset of FSPOST tagger: goo.gl/dY0qFe
+ * Link to Package with Model files (for preprocessing and clustering tools): 
+ 	bit.ly/3f56oAC
+ * Link to MGNN Tagset of FSPOST tagger: 
+ 	goo.gl/dY0qFe
  * Other language resources and data are available upon request.
 	
- Upon using the API or documents for your work, kindly include proper citations. 
+ Upon using the API or documents for your work, kindly include the proper citation. 
  
  Sample API and document reference:
  
