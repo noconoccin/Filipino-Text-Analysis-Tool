@@ -22,11 +22,12 @@
 ###################################################################################
 
 import data_utils
+import sys
 # import cluster
 # import fspost
 
-gold_standard_filename = 'test/MalasakitResponses_GoldStandard_Norm.xlsx'
-system_output_filename = 'test/Experiments/MalasakitResponses_934_dice_org_all_norm.xlsx'
+gold_standard_filename = 'test/MalasakitResponses_GoldStandard.xlsx'
+system_output_filename = 'test/Experiments/MalasakitResponses_934_dice_org_all.xlsx'
 gold_standard_filename_small = 'test/GoldStandard_small.xlsx'
 system_output_filename_small = 'test/MalasakitResponses_small.xlsx'
 
@@ -293,7 +294,8 @@ def compare_ie_phrases(system_output_list, gold_standard_list, word_count):
 
                 row += 1
             else:
-                print('Sentence Mismatch. Check Documents and Repeat the Test.')
+                sys.exit('Sentence Mismatch. Check Documents and Repeat the Test.')
+
 
         # Additional Values
         partial_match = over_extractions + under_extractions + overlapping_extractions

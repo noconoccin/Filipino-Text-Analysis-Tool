@@ -42,7 +42,7 @@
       <recent name="C:\Users\NN\Documents\Lasalle\THESIS\ThesisSoftware\lib" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.thesis_software">
+  <component name="RunManager" selected="Python.evaluate">
     <configuration name="evaluate" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ThesisSoftware" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -150,9 +150,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.evaluate" />
         <item itemvalue="Python.thesis_software" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.evaluate" />
         <item itemvalue="Python.normalize" />
         <item itemvalue="Python.fspost" />
       </list>
@@ -176,22 +176,22 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="550" y="160" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1590136590969" />
-    <state width="1515" height="178" key="GridCell.Tab.0.bottom" timestamp="1590480550359">
+    <state width="1515" height="178" key="GridCell.Tab.0.bottom" timestamp="1591275382008">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1515" height="178" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1590480550359" />
-    <state width="1515" height="178" key="GridCell.Tab.0.center" timestamp="1590480550359">
+    <state width="1515" height="178" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1591275382008" />
+    <state width="1515" height="178" key="GridCell.Tab.0.center" timestamp="1591275382008">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1515" height="178" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1590480550359" />
-    <state width="1515" height="178" key="GridCell.Tab.0.left" timestamp="1590480550359">
+    <state width="1515" height="178" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1591275382008" />
+    <state width="1515" height="178" key="GridCell.Tab.0.left" timestamp="1591275382008">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1515" height="178" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1590480550359" />
-    <state width="1515" height="178" key="GridCell.Tab.0.right" timestamp="1590480550359">
+    <state width="1515" height="178" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1591275382008" />
+    <state width="1515" height="178" key="GridCell.Tab.0.right" timestamp="1591275382008">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1515" height="178" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1590480550359" />
+    <state width="1515" height="178" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1591275382008" />
     <state width="1515" height="264" key="GridCell.Tab.1.bottom" timestamp="1589982652069">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -208,22 +208,14 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1515" height="264" key="GridCell.Tab.1.right/0.0.1536.834@0.0.1536.834" timestamp="1589982652069" />
-    <state x="279" y="61" key="SettingsEditor" timestamp="1590479228168">
+    <state x="279" y="61" key="SettingsEditor" timestamp="1591265760315">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="279" y="61" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1590479228168" />
-    <state x="491" y="160" width="540" height="524" key="StructurePopup" timestamp="1585834839607">
+    <state x="279" y="61" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1591265760315" />
+    <state x="466" y="243" key="com.intellij.ide.util.TipDialog" timestamp="1595777080875">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="491" y="160" width="540" height="524" key="StructurePopup/0.0.1536.834@0.0.1536.834" timestamp="1585834839607" />
-    <state x="466" y="243" key="com.intellij.ide.util.TipDialog" timestamp="1590468882925">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="466" y="243" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1590468882925" />
-    <state width="600" height="424" key="javadoc.popup" timestamp="1583953110848">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state width="600" height="424" key="javadoc.popup/0.0.1536.834@0.0.1536.834" timestamp="1583953110848" />
+    <state x="466" y="243" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1595777080875" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
