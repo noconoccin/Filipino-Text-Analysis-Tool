@@ -29,7 +29,8 @@
 	2) Supporting documents to run and understand the API such as User's Manual, 
 	   Technical Manual, requirements.txt, full and abridged Thesis documentation
 	3) 'Test' folder that produces generated outputs from modules
-	4) Miscellaneous folders comprising of libraries and caches
+	4) 'assets' and 'web' containing Bootstrap resources and HTML report
+	5) Miscellaneous folders comprising of libraries and caches
 	  
  * Link to Package with Model files (for preprocessing and clustering tools): 
  	bit.ly/3f56oAC

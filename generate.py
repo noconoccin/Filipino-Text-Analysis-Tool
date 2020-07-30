@@ -20,6 +20,9 @@
 # file can still be written for tracing or other form of output.
 ###################################################################################
 
+import re
+import webbrowser
+import data_utils
 from datetime import datetime
 from docx import Document
 from docx.enum.dml import MSO_THEME_COLOR_INDEX
@@ -227,3 +230,165 @@ def write_report(filename, malasakit_response_list, ranked_clusters_list):
         cell._tc.tcPr.tcW.type = 'auto'
 
     document.save(filename)
+
+
+def generate_web(web_filename, excel_filename, organization_format, cluster_limit):
+    """
+    Function that generates the report in a web/HTML format. It takes the contents of an excel file and displays the
+    indicated number of entries for organize all entries and organize per response categories. Target words are linked
+    to their respective Malasakit responses.
+
+    Args:
+        web_filename (str): The file path of the generated HTML file.
+        excel_filename (str): The file path of the excel file to be converted into web version.
+        organization_format (str): The organizational format used (i.e., OAE or ORC).
+        cluster_limit (int): The limited number of clusters to be shown (Top 5, 10, 25). 0 value for unlimited.
+    """
+    print('GENERATING WEB VERSION')
+    malasakit_response_list = []
+    limit_counter = 0
+    y = 0
+
+    malasakit_response_list = data_utils.read_excel(excel_filename)  # Reference for Malasakit Responses
+
+    clusters_list, category_count = data_utils.read_clusters_excel(excel_filename, organization_format)
+    # print(clusters_list)
+
+    # Generate website
+    code = ""
+    html_skeleton = open('web/html_skeleton.txt', 'r')  # Get HTML template
+    string_list = html_skeleton.readlines()  # Put in the list the string contents per new line
+
+    # Composing code to write on HTML file
+    # Go through each line in the template
+    if category_count == 0:
+        category_count += 1
+
+    for line in string_list:
+        code += line
+        # Place list of clusters after Cluster List header
+        if 'Cluster List</h2>' in line:
+            code += "<hr/>"
+
+            for x in range(category_count):
+                while y < len(clusters_list):
+                    cluster = clusters_list[y]
+                    # print(cluster)
+                    # print(y)
+                    if cluster_limit != 0:
+                        limit_counter += 1
+                        if organization_format == 'ORC':
+                            if limit_counter == cluster_limit * 2 + 2:  # Check if it exceeded the limit for display
+                                while not str(clusters_list[y]).isupper() and not y + 1 == len(clusters_list):
+                                    if y + 1 != len(clusters_list):
+                                        y += 1
+                                break
+                        elif limit_counter == cluster_limit * 2 + 1:  # Check if it exceeded the limit for display
+                            break
+
+                    if organization_format == 'ORC' and str(cluster).isupper():
+                        code += "<h4 class=\"alert alert-success text-center\">" + cluster + "</h4>\n"
+                    else:
+                        if "Cluster" in cluster:
+                            code += "<hr/><h5>" + cluster + "</h5><hr/>\n"
+                        else:  # Tuple
+                            code += "<p>Frequency: " + str(cluster[1]) + "<br>" + "Proposed Action: " + cluster[2] + \
+                                    "<br>" + "Targets:"
+
+                            # Hyperlink Assignment and Generation
+                            # Compare target words with the response ids in the cluster,
+                            # if the response contains the word, assign hyperlink to that cluster
+                            response_id_list = cluster[0].split('|')  # Get each id in sentence ids
+
+                            # Get lexicalized words
+                            lexicalized_word_list = re.findall("\w+ \(\w+[, \w+]*\)", cluster[3])
+
+                            tuple_to_string = ''.join(cluster[3])
+
+                            # Remove lexicalized words
+                            for word in lexicalized_word_list:
+                                tuple_to_string = tuple_to_string.replace(word + ',', '')
+                                tuple_to_string = tuple_to_string.replace(word, '')
+
+                            tuple_to_string = re.sub(" +", " ", tuple_to_string)
+                            tuple_to_string = tuple_to_string.strip()
+                            tuple_to_string = tuple_to_string.strip(',')
+
+                            target_list = tuple_to_string.split(', ')  # Get each word in target
+
+                            # print(response_id_list)
+                            # print(target_list)
+
+                            # Writing and making lexicalized words hyperlink
+                            for lex in lexicalized_word_list:  # For every sub-clusters
+                                lex = re.sub("[(,)]", "", lex)  # Remove punctuations
+                                word_list = lex.split(' ')
+                                lex_count = 1
+                                for word in word_list:  # For every word
+                                    for response_id in response_id_list:  # For every response
+                                        if lex_count == 1:
+                                            if word in malasakit_response_list[int(response_id) - 1].response:
+                                                code += " <a class=\"text-success\" href=\"#R" + response_id + "\">" + word + "</a> ("
+                                                break
+                                        elif lex_count > 1 and lex_count != len(word_list):
+                                            if word in malasakit_response_list[int(response_id) - 1].response:
+                                                code += "<a class=\"text-success\" href=\"#R" + response_id + "\">" + word + "</a>, "
+                                                break
+                                        else:
+                                            if word in malasakit_response_list[int(response_id) - 1].response:
+                                                code += "<a class=\"text-success\" href=\"#R" + response_id + "\">" + word + "</a>),"
+                                                break
+                                    lex_count += 1
+
+                            # Writing and making target hyperlink
+                            for target in target_list:
+                                # print("TARGET: ", target)
+                                for response_id in response_id_list:
+                                    # print("Response ID: ", int(response_id)-1)
+                                    # print("COMPARE: ", target in malasakit_response_list[int(response_id)-1].response)
+                                    if target in malasakit_response_list[int(response_id)-1].response:
+                                        code += " <a class=\"text-success\" href=\"#R" + response_id + "\">" + target + "</a>,"
+                                        break
+                                    # No case if not found - all should have link since they came from the data
+                            code = code.strip(',')
+                            code += "</p>"
+
+                            code += "<ul class=\"list-group\">" + \
+                                    "<li class=\"list-group-item list-group-item-success py-2\"><b>Sample Cluster Members</b></li>"
+
+                            sample_counter = 0
+                            for response_id in response_id_list:
+                                if sample_counter == 5:
+                                    break
+                                else:
+                                    code += "<li class=\"list-group-item py-2\"><b>Response " + response_id + ":</b> " + \
+                                            malasakit_response_list[int(response_id)-1].response + "</li>"
+                                sample_counter += 1
+                            code += "</ul><br>"
+
+                    y += 1
+                limit_counter = 0
+
+        # Place list of responses after Malasakit Response List header
+        if 'Malasakit Response List</h2>' in line:
+            code += "<hr/>"
+            code += "<ul class=\"list-group list-group-flush\">"
+            for response in malasakit_response_list:
+                code += "<li class=\"list-group-item py-2\">" + "<p class=\"mb-0\" id=\'R" + str(response.response_id) + "\'><b>Response #" + \
+                        str(response.response_id) + ":</b> " + response.response + "</p></li>"
+            code += "</ul>"
+
+    html_skeleton.close()
+
+    f = open(web_filename, 'w+')
+
+    message = code
+
+    f.write(message)
+    f.close()
+
+    # Change path to reflect file location
+    webbrowser.open_new_tab(web_filename)
+
+# 'test/MalasakitResponses_small.xlsx'
+# generate_web('web/index.html', 'test/Experiments/MalasakitResponses_934_dice_org_category.xlsx', 'ORC', 10)

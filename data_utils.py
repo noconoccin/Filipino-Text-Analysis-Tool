@@ -116,8 +116,6 @@ def read_gold_standard_excel(filename):
 
     Args:
         filename (str): The file location of the spreadsheet.
-        sheet_num (int): The sheet number to be read (Sheet 2 is designated for insight phrases and Sheet 3 is for word
-                         sets).
 
     Returns:
         goldstandard_phrases_list: a list of strings containing the gold standard (phrases) information.
@@ -153,6 +151,76 @@ def read_gold_standard_excel(filename):
         column_list = []
 
     return goldstandard_phrases_list, goldstandard_word_sets_list
+
+
+def read_clusters_excel(filename, organization_format):
+    """
+    Function that reads the values in an excel file and stores the value in a list.
+
+    Args:
+        filename (str): The file location of the spreadsheet.
+        organization_format (str): The organizational format used (i.e., OAE or ORC).
+
+    Returns:
+        clusters_list: a list of strings containing the clusters.
+        category_count: the number of categories. 0 for OAE.
+    """
+    clusters_list = []
+    response_id = ''
+    frequency = ''
+    action = ''
+    target = ''
+    response_ctr = 0
+    cell_ctr = 1
+    category_count = 0
+
+    workbook = load_workbook(filename)  # Open a workbook from file
+    sheet_names_list = workbook.get_sheet_names()  # Get List of Sheets (to access regardless of sheet name)
+    sheet = workbook.get_sheet_by_name(sheet_names_list[3])  # Access Sheet 4 to get Ranked Cluster Data
+
+    if organization_format == 'OAE':
+        # Iterates the sheet per row
+        for row in sheet[1:sheet.max_row]:
+            if 'Cluster' not in row[0].value:
+                for cell in row:
+                    if cell_ctr == 1:
+                        response_id = cell.value  # Record response id
+                    elif cell_ctr == 2:
+                        frequency = cell.value  # Record frequency count
+                    elif cell_ctr == 3:
+                        action = cell.value  # Record proposed action
+                    elif cell_ctr == 4:
+                        target = cell.value  # Record target
+                    cell_ctr += 1  # Toggle
+                # Create Cluster tuple and add into the list
+                clusters_list.append((response_id, frequency, action, target))
+                cell_ctr = 1  # Reset counter
+            else:
+                clusters_list.append(row[0].value)
+
+    if organization_format == 'ORC':
+        # Iterates the sheet per row
+        for row in sheet[1:sheet.max_row]:
+            if 'Cluster' not in row[0].value and not row[0].value.isupper():
+                for cell in row:
+                    if cell_ctr == 1:
+                        response_id = cell.value  # Record response id
+                    elif cell_ctr == 2:
+                        frequency = cell.value  # Record frequency count
+                    elif cell_ctr == 3:
+                        action = cell.value  # Record proposed action
+                    elif cell_ctr == 4:
+                        target = cell.value  # Record target
+                    cell_ctr += 1  # Toggle
+                # Create Cluster tuple and add into the list
+                clusters_list.append((response_id, frequency, action, target))
+                cell_ctr = 1  # Reset counter
+            else:
+                clusters_list.append(row[0].value)
+                if row[0].value.isupper():
+                    category_count += 1
+
+    return clusters_list, category_count
 
 
 def read_excel(filename):
