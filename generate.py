@@ -140,7 +140,7 @@ def write_report(filename, malasakit_response_list, ranked_clusters_list):
     footer.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
     footer.paragraph_format.line_spacing = 1
     footer_text = footer.add_run('Extracting and Organizing Disaster-related Philippine Community Responses for Aiding '
-                                 'Nationwide Risk Reduction Planning and Response (N. Nocon, 2019)')
+                                 'Nationwide Risk Reduction Planning and Response (N. Nocon, 2020)')
     footer_text.font.name = 'Segoe UI'
     footer_text.font.size = Pt(10)
 
@@ -292,7 +292,7 @@ def generate_web(web_filename, excel_filename, organization_format, cluster_limi
                         if "Cluster" in cluster:
                             code += "<hr/><h5>" + cluster + "</h5><hr/>\n"
                         else:  # Tuple
-                            code += "<p>Frequency: " + str(cluster[1]) + "<br>" + "Proposed Action: " + cluster[2] + \
+                            code += "<p>Number of Entries: " + str(cluster[1]) + "<br>" + "Proposed Action: " + cluster[2] + \
                                     "<br>" + "Targets:"
 
                             # Hyperlink Assignment and Generation
@@ -389,6 +389,7 @@ def generate_web(web_filename, excel_filename, organization_format, cluster_limi
 
     # Change path to reflect file location
     webbrowser.open_new_tab(web_filename)
+
 
 # 'test/MalasakitResponses_small.xlsx'
 # generate_web('web/index.html', 'test/Experiments/MalasakitResponses_934_dice_org_category.xlsx', 'ORC', 10)
