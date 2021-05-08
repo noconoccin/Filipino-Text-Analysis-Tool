@@ -71,9 +71,9 @@
 			<a class="btn btn-outline-success" href="#response_list">Malasakit Response List</a>
 		</div>
 
-		<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+		<div class="pricing-header px-3 py-3 pt-md-5 pb-md-0 mx-auto text-center">
 			<h1 class="display-6">Clustered Insights Report</h1>
-			<p class="container lead">The information below were extracted and organized automatically. Each cluster contain ideas collected from local communities about preventing and mitigating disaster in the Philippines. <i>Frequency</i> indicates the number of ideas, <i>Proposed action</i> indicates the suggested actions to take, and <i>Target</i> indicates subjects to apply the actions. Click on Target words to display the original post.</p>
+			<p class="container lead">The information below were extracted and organized automatically. Each cluster contain ideas collected from local communities about preventing and mitigating disaster in the Philippines. <i>Number of Entries</i> indicates the number of times an idea was mentioned, <i>Proposed action</i> indicates the suggested actions to take, and <i>Target</i> indicates which subjects should the actions be applied to. </br><div class="shadow-sm p-1 mb-5 bg-white rounded border border-success container col-4 align-self-center">Pro tip: Click on Target words to display the original post.</div></p>
 		</div>
 
 		<div class="container">
