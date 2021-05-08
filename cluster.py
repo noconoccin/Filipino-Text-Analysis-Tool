@@ -409,7 +409,10 @@ def cluster_information(malasakit_response_list, clustering_technique):
                     similarity = 0.0  # No operation done, so set similarity to 0
                     # print('{} or {} not found'.format(first_string, second_string))
             elif clustering_technique == 'fasttext':
-                similarity = model.similarity(first_string, second_string)
+                try:
+                    similarity = model.similarity(first_string, second_string)
+                except KeyError:
+                    similarity = 0.0  # No operation done, so set similarity to 0
 
             # print(first_string, "and", second_string, "=", similarity)
             if similarity == 1.0 or first_string.casefold() == second_string.casefold():
